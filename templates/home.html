@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brain Tumor Detection</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .navbar {
+      margin-bottom: 30px;
+    }
+    .navbar-brand {
+      padding-left: 150px;
+      padding-right: 150px;
+      
+    }
+
+    .navbar-nav .nav-item {
+      /* margin-right: 50px; */
+      padding-left: 20px;
+      padding-right:20px;
+    }
+    #con{
+      margin-right: 80px;
+    }
+
+    h1, h2 {
+      color: #343a40;
+    }
+
+    p {
+      color: #6c757d;
+    }
+
+    .btn-custom {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 50px;
+      padding: 10px 20px;
+    }
+
+    .btn-custom:hover {
+      background-color: #0056b3;
+    }
+
+    #uploadedImage {
+      display: none;
+      max-width: 500px;
+      max-height: 500px;
+      margin: 20px auto;
+    }
+
+    #resultContainer {
+      display: none;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 30px;
+      padding: 10px 0;
+      background-color: #343a40;
+      color: #fff;
+      text-align: center;
+    }
+
+#aboutSection {
+  max-width: 1400px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  /* border-radius: 8px; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  display: flex;
+  align-items: center; 
+}
+
+#aboutImage {
+  flex: 1;
+  padding-right: 20px; /* Space between image and text */
+}
+
+#aboutImage img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+#aboutText {
+  flex: 2;
+}
+
+#aboutSection h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  margin-left: 200px;
+}
+
+#aboutSection h3 {
+  font-size: 24px;
+  margin-top: 20px;
+  color: #343a40;
+}
+
+#aboutSection ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #6c757d;
+}
+
+#aboutSection ul li {
+  margin-bottom: 10px;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" style="margin-left: -50px ;" href="/"> <img src="static/images/icon.png" alt=""  height="50px" width="100px"> &nbsp;Brain Tumor Detection</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active ">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#aboutSection">About</a>
+        </li>
+        <li class="nav-item" id="con">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1 class="text-center">Brain Tumor Detection</h1>
+    <h2 class="text-center">About Brain Tumors</h2>
+    <p>
+      A brain tumor is an abnormal growth of cells within the brain or its surrounding tissue. There are two main types of brain tumors: primary and secondary.
+      <ul>
+        <li><strong>Glioma Tumor:</strong> Originates from glial cells in the brain or spine, potentially leading to serious neurological symptoms.</li>
+        <li><strong>Malignant Tumor:</strong> A cancerous growth that can invade nearby tissues and spread to other parts of the body.</li>
+        <li><strong>Pituitary Tumor:</strong> An abnormal growth in the pituitary gland that can cause hormonal imbalances and other health issues.</li>  
+      </ul>
+      Brain tumors can be life-threatening, and early detection is crucial for effective treatment. Advanced imaging techniques like MRI play a critical role in diagnosing and managing brain tumors.
+    </p>
+    <img id="banner" src="static\brain-tumor.jpg" height="300" width="500px" class="img-fluid mx-auto d-block"> 
+    <h2 class="text-center mt-4">Upload MRI Here</h2>
+    <div class="text-center">
+      <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" class="btn btn-outline-secondary" name="image" id="image" accept="image/*" onchange="previewImage()">
+        <button type="button" class="btn btn-custom mt-3" onclick="uploadImage()">Submit</button>
+      </form>
+      <p id="uploadStatus"></p>
+      <div id="resultContainer">
+        <img id="uploadedImage" src="" alt="Uploaded Image" class="img-fluid">
+        <p id="resultText"></p>
+      </div>
+    </div>
+  </div>
+  
+  <div id="aboutSection">
+    <div id="aboutImage">
+      <img src="static\symptoms-brain-tumors.jpg" alt="Brain Tumor Detection">
+    </div>
+    <div id="aboutText">
+      <h2>About</h2>
+      <p>
+        Brain tumor detection is crucial for early intervention and effective treatment. Accurate diagnosis improves treatment choices and patient outcomes.
+      </p>
+  
+      <h3>Why It Matters</h3>
+      <ul>
+        <li><strong>Early Detection:</strong> Enables timely treatment and better outcomes.</li>
+        <li><strong>Precision:</strong> Helps in selecting effective treatment options.</li>
+        <li><strong>Monitoring:</strong> Assists in tracking tumor growth and treatment response.</li>
+      </ul>
+  
+      <h3>Detection Methods</h3>
+      <ul>
+        <li><strong>MRI:</strong> Provides detailed brain images for tumor identification.</li>
+        <li><strong>CT Scan:</strong> Offers cross-sectional images, often used in emergencies.</li>
+        <li><strong>PET Scan:</strong> Assesses tumor metabolic activity.</li>
+        <li><strong>Biopsy:</strong> Confirms the presence and type of tumor cells.</li>
+      </ul>
+  
+      
+  
+      <p>
+        Leveraging these technologies enhances the accuracy of brain tumor detection, leading to improved patient care and treatment outcomes.
+      </p>
+    </div>
+  </div>
+
+  <div  id="contact" class="contact3 py-5">
+    <div class="row no-gutters">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="card-shadow">
+              <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/contact/2.jpg" class="img-fluid">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="contact-box ml-3">
+              <h1 class="font-weight-light mt-2">Quick Contact</h1>
+              <form class="mt-4">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group mt-2">
+                      <input class="form-control" type="text" placeholder="name">
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="form-group mt-2">
+                      <input class="form-control" type="email" placeholder="email address">
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="form-group mt-2">
+                      <input class="form-control" type="text" placeholder="phone">
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <div class="form-group mt-2">
+                      <textarea class="form-control" rows="3" placeholder="message"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-lg-12">
+                    <button type="submit" class="btn btn-danger-gradiant mt-3 text-white border-0 px-3 py-2"><span> SUBMIT</span></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-12">
+            <div class="card mt-4 border-0 mb-4">
+              <div class="row">
+                <div class="col-lg-4 col-md-4">
+                  <div class="card-body d-flex align-items-center c-detail pl-0">
+                    <div class="mr-3 align-self-center">
+                      <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/contact/icon1.png">
+                    </div>
+                    <div class="">
+                      <h6 class="font-weight-medium">Address</h6>
+                      <p class="">601 Sherwood Ave.
+                        <br> San Bernandino</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <div class="card-body d-flex align-items-center c-detail">
+                    <div class="mr-3 align-self-center">
+                      <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/contact/icon2.png">
+                    </div>
+                    <div class="">
+                      <h6 class="font-weight-medium">Phone</h6>
+                      <p class="">+91 73976 39450
+                        <br> 630 446 8851</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                  <div class="card-body d-flex align-items-center c-detail">
+                    <div class="mr-3 align-self-center">
+                      <img src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/contact/icon3.png">
+                    </div>
+                    <div class="">
+                      <h6 class="font-weight-medium">Email</h6>
+                      <p class="">
+                        bharathvajs200301@gmail.com
+                        <br> 123@wrappixel.com
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <footer>
+    <div class="text-center" style="color: white;">
+      <p style="color: white;"">&copy; 2024 Brain Tumor Detection. All rights reserved.</p>
+      Designed and Developed by <a href="https://www.linkedin.com/in/bharathvaj-saravanan-ab21001b4/" style="color: white;">Bharathvaj S</a>
+      </div>
+  </footer>
+
+  <script>
+    function previewImage() {
+      const file = document.getElementById('image').files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const uploadedImage = document.getElementById('uploadedImage');
+          uploadedImage.src = e.target.result;
+          uploadedImage.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function uploadImage() {
+      var formData = new FormData(document.getElementById('uploadForm'));
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+          if (this.status == 200) {
+            document.getElementById('uploadStatus').innerText = "File uploaded successfully!";
+            document.getElementById('resultContainer').style.display = 'block';
+            var result = parseResult(this.responseText);
+            document.getElementById('resultText').innerHTML = result;
+          } else {
+            document.getElementById('uploadStatus').innerText = "Error uploading file.";
+          }
+        }
+      };
+      xhttp.open("POST", "/execute_python_function", true);
+      xhttp.send(formData);
+    }
+
+    function parseResult(result) {
+      let tumorDescription = {
+        'No Tumor': 'No tumor is found in the MRI.',
+        'Pituitary Tumor': 'An abnormal growth in the pituitary gland that can cause hormonal imbalances and other health problems. Please consult a doctor.<br><b>Symptoms:</b> <br> Headaches - Persistent or severe headaches that are often worse in the morning.<br> Vision Problems - Blurred or double vision, or loss of peripheral vision. <br> Hormonal Imbalances - Unexplained weight gain or loss, menstrual irregularities, or reduced libido. <br> Nausea and Vomiting - Persistent nausea or vomiting, particularly in the morning. <br> Fatigue - Unusual tiredness or weakness not explained by other factors.',
+        'Meningioma Tumor': 'A type of brain tumor that forms on the meninges, the protective layers covering the brain and spinal cord. Please consult a doctor. <br><b>Symptoms:</b><br> Headaches - Persistent or worsening headaches, often localized to one area. <br> Seizures - Sudden, uncontrolled electrical disturbances in the brain causing convulsions or loss of consciousness. <br> Vision Problems - Blurred or double vision, or loss of vision. <br> Hearing Loss - Difficulty hearing or ringing in the ears (tinnitus). <br> Cognitive Changes - Memory problems, confusion, or difficulty concentrating.',
+        'Glioma Tumor': 'A tumor that originates from the glial cells of the brain or spine, which can be malignant or benign. Please consult a doctor. <br><b>Symptoms:</b> <br> Persistent Headaches - Often severe and worsening over time, which may not respond well to typical pain relief methods. <br> Seizures - Unexplained seizures or convulsions can occur, even in individuals with no previous history of seizures. <br> Neurological Deficits - Symptoms such as weakness on one side of the body, difficulty with balance or coordination, or problems with speech or vision. <br> Cognitive or Personality Changes - Noticeable changes in memory, thinking, or behavior, including confusion or personality shifts. <br> Nausea and Vomiting - Persistent nausea or vomiting that is unrelated to other common causes, often due to increased intracranial pressure.'
+      };
+      return `<br><h3>Output</h3><br><b>${result}</b> is found in the MRI. ${tumorDescription[result]}`;
+    }
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
